@@ -1,5 +1,6 @@
 package com.example.instagram;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public static final String TAG = "MainActivity";
+    public static final int CODE_TO_GO_BACK = 20;
 
     private EditText etDescription;
+    private Button btnLogOut;
     private Button btnTakePhoto;
     private ImageView ivPostImage;
     private Button btnSubmit;
@@ -50,6 +53,17 @@ public class MainActivity extends AppCompatActivity {
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
         ivPostImage = findViewById(R.id.ivImage);
         btnSubmit = findViewById(R.id.btnUpload);
+        btnLogOut = findViewById(R.id.btnLog_Out);
+
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                Log_out();
+                Toast.makeText(MainActivity.this, "Logging out.", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //queryPosts();
+    }
+
+    private void Log_out(){
+        Intent i =  new Intent(MainActivity.this, LogInActivity.class);
+        startActivity(i);
+
     }
 
     private void launchCamera() {

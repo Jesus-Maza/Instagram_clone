@@ -13,15 +13,15 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class LogInActivity extends AppCompatActivity {
-
     public static final String TAG = "LogInActivity";
     private EditText EtUsername;
     private EditText Etpassword;
     private Button btnLogIn;
-
-
+    public static final int REQUEST_CODE = 20;
+    private Button btnSign_Up;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,16 @@ public class LogInActivity extends AppCompatActivity {
         EtUsername =  findViewById(R.id.username);
         Etpassword = findViewById(R.id.etpassword);
         btnLogIn = findViewById(R.id.button);
+        btnSign_Up = findViewById(R.id.btnSignUp);
+
+        btnSign_Up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String sign_user = EtUsername.getText().toString();
+                String password_user = Etpassword.getText().toString();
+                Sign_Up(sign_user, password_user);
+            }
+        });
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +53,24 @@ public class LogInActivity extends AppCompatActivity {
                 String password = Etpassword.getText().toString();
                 loginUser(username, password);
 
+            }
+        });
+    }
+
+    private void Sign_Up(String sign_user, String user_password){
+        ParseUser user = new ParseUser();
+        user.setUsername(sign_user);
+        user.setPassword(user_password);
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if( e == null){
+                    Toast.makeText(LogInActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Log.e(TAG, "Error", e);
+                }
+                goMainActivity();
             }
         });
     }
