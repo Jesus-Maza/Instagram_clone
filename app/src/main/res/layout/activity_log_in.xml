@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".LogInActivity">
 
     <LinearLayout
@@ -25,30 +26,37 @@
             android:id="@+id/username_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp">
+            android:layout_marginTop="22dp"
+            android:textColorHint="@color/black">
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
                 android:singleLine="true"
+                android:textColor="@color/black"
                 android:hint="Username"
+                android:textColorHint="#e7e7e7"
                 android:background="@drawable/edit_text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:textColorHint="@color/black"
             android:id="@+id/username_text"
             android:layout_marginTop="15dp"
             app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:textColor="@color/black"
                 android:id="@+id/etpassword"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:textColorHint="@color/black"
                 android:textSize="16sp"
                 android:padding="0dp"
                 android:singleLine="true"

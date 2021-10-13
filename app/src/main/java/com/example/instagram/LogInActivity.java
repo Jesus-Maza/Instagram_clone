@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
@@ -16,12 +17,16 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class LogInActivity extends AppCompatActivity {
+
+    private ProgressBar progressBar;
     public static final String TAG = "LogInActivity";
     private EditText EtUsername;
     private EditText Etpassword;
     private Button btnLogIn;
     public static final int REQUEST_CODE = 20;
     private Button btnSign_Up;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,7 @@ public class LogInActivity extends AppCompatActivity {
         if(ParseUser.getCurrentUser() != null ){
             goMainActivity();
         }
+
 
         EtUsername =  findViewById(R.id.username);
         Etpassword = findViewById(R.id.etpassword);
