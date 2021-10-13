@@ -63,6 +63,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
+    public void clear(){
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Post> postsList){
+        posts.addAll(postsList);
+        notifyDataSetChanged();
+
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private LikeButton likeButton;
