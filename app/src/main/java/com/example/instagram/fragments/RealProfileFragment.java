@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Environment;
 import android.os.FileUtils;
@@ -51,6 +52,7 @@ import java.util.List;
  */
 public class RealProfileFragment extends Fragment {
 
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rvPosts_for_profile;
     protected PostAdapter Rvadapter;
     protected List<Comments> allComments;
@@ -115,6 +117,20 @@ public class RealProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        swipeRefreshLayout = view.findViewById(R.id.SwipeContainer);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG,"Tring to refresh");
+                querryPosts();
+            }
+        });
 
         Button profile_pic;
 
@@ -270,8 +286,10 @@ public class RealProfileFragment extends Fragment {
                     for(Post post : posts){
                         Log.i(TAG, "Post " + post.getDescription() + ", username: " + post.getUser().getUsername());
                     }
-                    allPosts.addAll(posts);
-                    Rvadapter.notifyDataSetChanged();
+                    Rvadapter.clear();
+                    Rvadapter.addAll(posts);
+                    //allPosts.addAll(posts);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             });
 

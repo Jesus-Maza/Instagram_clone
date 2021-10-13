@@ -22,12 +22,18 @@
         android:text="Profile Photo"
         android:textAllCaps="false"
         android:id="@+id/setProfile_Photo"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/SwipeContainer"
         android:layout_marginTop="40dp"
-        android:layout_height="match_parent"
-        android:id="@+id/rvPost_for_Profile"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rvPost_for_Profile"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>
